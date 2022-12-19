@@ -12,12 +12,3 @@
  *       external/cwe/cwe-022
  */
 
-import javascript
-import semmle.javascript.security.dataflow.ZipSlipQuery
-import DataFlow::PathGraph
-
-from Configuration cfg, DataFlow::PathNode source, DataFlow::PathNode sink
-where cfg.hasFlowPath(source, sink)
-select source.getNode(), source, sink,
-  "Unsanitized archive entry, which may contain '..', is used in a $@.", sink.getNode(),
-  "file system operation"
